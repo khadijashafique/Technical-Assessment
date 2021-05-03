@@ -1,0 +1,28 @@
+void sortUsingSecondArr(int A1[], int A2[], int n)
+{
+	pair<int,int> pair_arr[n];
+	for (int i = 0; i < n; i++) {
+		pair_arr[i].first = A1[i];
+		pair_arr[i].second = A2[i];
+	}
+	sort(pair_arr, pair_arr + n);
+	for (int i = 0; i < n; i++) {
+		A1[i] = pair_arr[i].first;
+		A2[i] = pair_arr[i].second;
+	}
+}
+
+
+int activityselection(int start[], int end[], int n)
+{
+	sortUsingSecondArr(start, end, n);
+	int count = 1;                 //because we always select first activity
+	for (int i = 1; i < n; i++)
+	{
+		if (start[i] > end[i - 1])  //select if start time of next activity is greater than end time of previous
+		{
+			count = count + 1;
+		}
+	}
+	return count;
+}
