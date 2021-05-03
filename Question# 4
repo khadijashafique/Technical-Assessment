@@ -1,0 +1,19 @@
+int *candystore(int arr[], int n, int k)
+{
+	sort(arr, arr + n);
+	int i = 1,j=n-1, min_cost = arr[0], max_cost = arr[n - 1];
+	int end = n - 1 - k,start = k;
+	int arr[2];
+
+	while (i <= end && j>=start)
+	{
+		min_cost =min_cost + arr[i];
+		max_cost = max_cost + arr[j];
+		i++; j--;
+		end = end - k;
+		start = start + k;
+	}
+	arr[0] = min_cost;
+	arr[1] = max_cost;
+	return arr;
+}
