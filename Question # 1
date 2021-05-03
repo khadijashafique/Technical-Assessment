@@ -1,0 +1,34 @@
+list<int> spirallyTraverse(int **matrix,int R,int C)
+{
+	if (R >= 1 && C <= 100)
+	{
+		list<int> value;
+		return spiral_traversal(matrix, value, 0, R, 0, C);
+	}
+}
+
+list<int> spiral_traversal(int **matrix,list<int> value, int r_start,int r_end, int c_start,int c_end)
+{
+	if (r_start >= r_end || c_start >= c_end)
+		return value;
+
+	for (int i = r_start; i < c_end; i++)
+		value.push_back(matrix[r_start][i]);
+
+	for (int i = r_start + 1; i < r_end; i++)
+		value.push_back(matrix[i][c_end - 1]);
+
+	if (r_end - 1 != r_start)
+	{
+		for (int i = c_end - 2; i >= c_start; i--)
+			value.push_back(matrix[r_end - 1][i]);
+	}
+
+	if (c_end - 1 != c_start)
+	{
+		for (int i = r_end - 2; i > r_start; i--)
+			value.push_back(matrix[i][c_start]);
+	}
+
+	spiral_traversal(matrix,value, r_start + 1, r_end - 1, c_start + 1, c_end - 1);
+}
